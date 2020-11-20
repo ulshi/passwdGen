@@ -19,7 +19,7 @@ from . import views, testdb, search, search2
 
 urlpatterns = [
     url(r'^hello$', views.runoob),
-    url(r'^testdb$', testdb.testdb),
+    url(r'^passwdGen$', testdb.testdb),
     url(r'^search-form$', search.search_form),
     url(r'^search$', search.search),
     url(r'^search-post$', search2.search_post),
