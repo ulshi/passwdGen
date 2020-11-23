@@ -1,8 +1,7 @@
 FROM python:3.6-alpine
 COPY . /src
 WORKDIR /src
-RUN python3 install Django log pymysql SQLAlchemy
-RUN apk --no-cache add zeromq && adduser -s /bin/false -D django
+RUN pip3 install Django log pymysql SQLAlchemy
 
 EXPOSE 8000
 
