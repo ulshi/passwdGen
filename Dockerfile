@@ -1,12 +1,7 @@
-FROM python:3.6-alpine as builder
-
-RUN apk --no-cache add g++ zeromq-dev libffi-dev
+FROM python:3.6-alpine
 COPY . /src
 WORKDIR /src
-RUN pip install .
-
-FROM python:3.6-alpine
-
+RUN pip install Django log pymysql SQLAlchemy
 RUN apk --no-cache add zeromq && adduser -s /bin/false -D django
 COPY --from=builder /usr/local/lib/python3.6/site-packages /usr/local/lib/python3.6/site-packages
 COPY --from=builder /usr/local/bin/locust /usr/local/bin/locust
@@ -16,4 +11,4 @@ RUN chmod +x docker_start.sh
 EXPOSE 8000
 
 USER django
-ENDPOINT ["./docker_start.sh"]
+CMD ["./python3 manage.py runserver 0.0.0.0:8000"]
